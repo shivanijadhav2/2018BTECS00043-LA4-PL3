@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>STUDENT INFORMATION</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+    	div {
+            padding: 10px;
+            background-color: yellow;
+            overflow: hidden;
+        }
+    	input[type=text], textarea, select {
+            font: 17px Calibri;
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type=button]{ 
+            font: 17px Calibri;
+            width: auto;
+            float: right;
+            cursor: pointer;
+            padding: 7px;
+        }
+        h1 {
+ color: red;
+ font-family: verdana;
+ font-size: 300%;
+ text-align: center;
+}
+h3{
+
+            text-align: center;
+            color: white;
+            width: 100%; 
+            padding: 12px; 
+            border: 1px solid white; 
+            border-radius: 4px; 
+            box-sizing: border-box; 
+            margin-top: 6px; 
+            margin-bottom: 16px; 
+            resize: vertical ;
+            background-color: gray;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>STUDENT LOGIN FORM</h1>
+    <h3>Link for BONAFIED INFORMATION:</h3>
+<h3>
+    <a href="student_register.html">student registration</a>
+    <p>
+        <a href="wce.html">WALCHAND COLLEGE SANGLI</a>
+    </p>
+    <p>
+    <a href="admin_login.html">admin log in</a>
+  </p>
+</h3>
+    <div>
+        
+        <!--Add few elements to the form-->
+
+        <div>
+            <input type="text" id="txtName" placeholder="Enter your name" />
+        </div>
+        
+        <div>
+            <input type="text" id="txtdName" placeholder="Enter your department name" />
+        </div>
+        <div>
+            <input type="text" id="class1" placeholder="Enter your class" />
+        </div>
+        <div>
+            <input type="text" id="year" placeholder="Enter your year" />
+        </div>
+        <div>
+            <textarea id="msg" name="msg" placeholder="Write some message ..." style="height:100px"></textarea>
+        </div>
+        <div>
+            <input type="button" id="bt" value="Save data to file" onclick="saveFile()" />
+        </div>
+
+
+    </div>
+</body>
+<script>
+    let saveFile = () => {
+    	
+        // Get the data from each element on the form.
+    	const name = document.getElementById('txtName');
+        const department = document.getElementById('txtdName');
+        const class1 = document.getElementById('class1');
+        const year = document.getElementById('year');
+        const msg = document.getElementById('msg');
+        
+        // This variable stores all the data.
+        let data = 
+            '\r Name: ' + name.value + ' \r\n ' + 
+            'Age: ' +department.value + ' \r\n ' + 
+            'Email: ' + class1.value + ' \r\n ' + 
+            'Country: ' + year.value + ' \r\n ' + 
+            'Message: ' + msg.value;
+        
+        // Convert the text to BLOB.
+        const textToBLOB = new Blob([data], { type: 'text/plain' });
+        const sFileName = 'formData.txt';	   // The file to save the data.
+
+        let newLink = document.createElement("a");
+        newLink.download = sFileName;
+
+        if (window.webkitURL != null) {
+            newLink.href = window.webkitURL.createObjectURL(textToBLOB);
+        }
+        else {
+            newLink.href = window.URL.createObjectURL(textToBLOB);
+            newLink.style.display = "none";
+            document.body.appendChild(newLink);
+        }
+
+        newLink.click(); 
+    }
+</script>
+</html>
